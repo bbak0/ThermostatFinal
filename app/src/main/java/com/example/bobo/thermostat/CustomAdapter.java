@@ -106,7 +106,7 @@ public class CustomAdapter extends BaseAdapter {
         TextView temperatureTxt = (TextView) view.findViewById(R.id.temperature);
         TextView dateTxt = (TextView) view.findViewById(R.id.date);
         try {
-            temperatureTxt.setText(s.getType());
+            temperatureTxt.setText(capitalize(s.getType()));
             dateTxt.setText(s.getTime());
             img.setImageResource(images[i]);
         } catch (Exception e) {
@@ -319,6 +319,41 @@ public class CustomAdapter extends BaseAdapter {
         final TimePicker timePicker = (TimePicker)dialoglayout.findViewById(R.id.timePicker);
         // setting the time input to the selected one
         //desiredTime_text.setText(time_selected);
+        final TextView daySwitchesLeft = (TextView)dialoglayout.findViewById(R.id.dialog_day_left);
+        final TextView nightSwitchesLeft = (TextView)dialoglayout.findViewById(R.id.dialog_night_left);
+        final TextView dayTemp = (TextView)dialoglayout.findViewById(R.id.dayTemp_text);
+        final TextView nightTemp = (TextView)dialoglayout.findViewById(R.id.nightTemp_text);
+
+        daySwitchesLeft.setText(nrDaySwitchesOn() + "/5 used");
+        nightSwitchesLeft.setText(nrNightSwitchesOn() + "/5 used");
+
+
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                try {
+                    final String dayTempVal = HeatingSystem.get("dayTemperature");
+                    final String nightTempVal = HeatingSystem.get("nightTemperature");
+                    Log.d("temps",dayTempVal + " " + nightTempVal);
+                    dayTemp.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            dayTemp.setText(dayTempVal + "\u2103");
+                        }
+                    });
+                    nightTemp.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            nightTemp.setText(nightTempVal + "\u2103");
+                        }
+                    });
+                } catch (Exception e) {
+                    System.err.println("Error from getdata "+e);
+                }
+            }
+        }).start();
 
         // setting the availability of the radio buttons in accordance with the nr of day/night switches on until now
         // I have assumed that switches is "new" enough and that there is no need to start a new thread
@@ -614,6 +649,9 @@ public class CustomAdapter extends BaseAdapter {
         // starting the thread for retrieving the list
         dataThread.start();
 
+    }
+    private String capitalize(final String line) {
+        return Character.toUpperCase(line.charAt(0)) + line.substring(1);
     }
 
 }

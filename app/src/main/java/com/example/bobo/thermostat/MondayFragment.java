@@ -447,20 +447,7 @@ public class MondayFragment extends Fragment {
         return nr;
     }
 
-    void getTemperatures(){
-        new Thread(new Runnable() {
 
-            @Override
-            public void run() {
-                try {
-                    dayTempVal = HeatingSystem.get("dayTemperature");
-                    nightTempVal = HeatingSystem.get("nightTemperature");
-                } catch (ConnectException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-    }
 
     // pop-up dialog in which the user can modify the switch
     void addSwitchDialog() {
@@ -487,13 +474,39 @@ public class MondayFragment extends Fragment {
         final TextView daySwitchesLeft = (TextView)dialoglayout.findViewById(R.id.dialog_day_left);
         final TextView nightSwitchesLeft = (TextView)dialoglayout.findViewById(R.id.dialog_night_left);
         final TextView dayTemp = (TextView)dialoglayout.findViewById(R.id.dayTemp_text);
-        final TextView nightTemp = (TextView)dialoglayout.findViewById(R.id.dayTemp_text);
+        final TextView nightTemp = (TextView)dialoglayout.findViewById(R.id.nightTemp_text);
 
         daySwitchesLeft.setText(nrDaySwitchesOn() + "/5 used");
         nightSwitchesLeft.setText(nrNightSwitchesOn() + "/5 used");
-        getTemperatures();
-            dayTemp.setText(dayTempVal + "\u2103");
-            nightTemp.setText(nightTempVal + "\u2103");
+
+
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                try {
+                    dayTempVal = HeatingSystem.get("dayTemperature");
+                    nightTempVal = HeatingSystem.get("nightTemperature");
+                    Log.d("temps",dayTempVal + " " + nightTempVal);
+                    dayTemp.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            dayTemp.setText(dayTempVal + "\u2103");
+                        }
+                    });
+                    nightTemp.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            nightTemp.setText(nightTempVal + "\u2103");
+                        }
+                    });
+                } catch (Exception e) {
+                    System.err.println("Error from getdata "+e);
+                }
+            }
+        }).start();
+
 
 
         // setting the availability of the radio buttons in accordance with the nr of day/night switches ON until now
