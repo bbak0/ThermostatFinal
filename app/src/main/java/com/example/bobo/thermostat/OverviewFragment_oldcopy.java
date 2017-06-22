@@ -7,9 +7,9 @@ import android.content.DialogInterface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;//PAY ATTENTION TO HAVE THIS ONE!
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.Fragment;
 import android.telephony.SignalStrength;
 import android.text.InputType;
 import android.view.LayoutInflater;
@@ -27,19 +27,24 @@ import util.HeatingSystem;
 
 import static com.example.bobo.thermostat.R.id.updateDayButton;
 import static com.example.bobo.thermostat.R.id.updateNightButton;
+import static com.example.bobo.thermostat.R.id.updateTargetButton;
 import static java.lang.Thread.sleep;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class OverviewFragment extends Fragment {
+public class OverviewFragment_oldcopy extends Fragment implements View.OnClickListener {
 
     View v;
     //TextView
     TextView currentTemp_text, dayTemp_text, nightTemp_text;
     //EditText
+    EditText targetTemp_text;
     //Buttons
+    Button updateTarget_button;
+    Button updateDay_button;
+    Button updateNight_button;
     // Declare day/night/current/desired temperature
     String dayTemp, nightTemp, currentTemp, targetTemp;
     // auto-updates
@@ -62,7 +67,7 @@ public class OverviewFragment extends Fragment {
     String dialog_message;
     String typeOfSet;
 
-    public OverviewFragment() {
+    public OverviewFragment_oldcopy() {
         // Required empty public constructor
         setHasOptionsMenu(true);
     }
@@ -72,7 +77,7 @@ public class OverviewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        v = inflater.inflate(R.layout.fragment_overview_copy2, container, false);
+        v = inflater.inflate(R.layout.fragment_overview, container, false);
 
         // START
 
@@ -81,16 +86,22 @@ public class OverviewFragment extends Fragment {
         currentTemp_text = (TextView) v.findViewById(R.id.currentTemp_text);
         dayTemp_text = (TextView) v.findViewById(R.id.dayTemp_text);
         nightTemp_text = (TextView) v.findViewById(R.id.nightTemp_text);
+        targetTemp_text = (EditText) v.findViewById(R.id.targetTemperature_text);
+        updateTarget_button = (Button) v.findViewById(updateTargetButton);
+        updateDay_button = (Button) v.findViewById(updateDayButton);
+        updateNight_button = (Button) v.findViewById(updateNightButton);
         NightDayThread = new Thread();
         CurrentThread = new Thread();
 
         // setting the clicks
-
+        updateTarget_button.setOnClickListener(this);
+        updateDay_button.setOnClickListener(this);
+        updateNight_button.setOnClickListener(this);
 
         // Start the auto-updates
         nightDayTemperature();
         currentTemperature();
-
+        
         return v;
     }
 
@@ -301,6 +312,24 @@ public class OverviewFragment extends Fragment {
 
     // overwriting the current temperature
 
+    public void updateTarget(View v) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    if (isNetworkAvailable() && autoCurrent && autoDayNight) {
+                        // getting the text from the box
+                        targetTemp = String.valueOf(targetTemp_text.getText());
+                        HeatingSystem.put("currentTemperature", targetTemp);
+                    } else {
+                        writeNoInternet.sendEmptyMessage(0);
+                    }
+                } catch (Exception e) {
+                    System.err.println("Error from getdata " + e);
+                }
+            }
+        }).start();
+    }
 
     // input dialog for changing all temperatures
 
@@ -400,7 +429,16 @@ public class OverviewFragment extends Fragment {
     }
 
     // listening for clicks
-
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == updateTargetButton) {
+            updateTarget(v);
+        } else if (v.getId() == updateDayButton) {
+            updateDay(v);
+        } else if (v.getId() == updateNightButton) {
+            updateNight(v);
+        }
+    }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

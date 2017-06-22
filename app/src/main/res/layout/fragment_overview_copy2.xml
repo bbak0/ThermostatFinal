@@ -138,7 +138,7 @@
                 android:layout_gravity="center">
 
                 <TextView
-                    android:id="@+id/textView8"
+                    android:id="@+id/nightTemp_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@+id/textView7"
@@ -150,12 +150,12 @@
                     android:textSize="24dp" />
 
                 <TextView
-                    android:id="@+id/textView12"
+                    android:id="@+id/dayTemp_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignBaseline="@+id/textView11"
                     android:layout_alignBottom="@+id/textView11"
-                    android:layout_alignStart="@+id/textView8"
+                    android:layout_alignStart="@+id/nightTemp_text"
                     android:layout_marginLeft="0dp"
                     android:layout_marginRight="4dp"
                     android:text="25C"
@@ -183,9 +183,9 @@
                     android:id="@+id/imageButton3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/textView8"
+                    android:layout_alignTop="@+id/nightTemp_text"
                     android:layout_marginLeft="8dp"
-                    android:layout_toEndOf="@+id/textView8"
+                    android:layout_toEndOf="@+id/nightTemp_text"
                     android:background="?android:selectableItemBackground"
                     android:paddingTop="2dp"
                     android:tint="@color/colour_highlight_grey"
@@ -195,9 +195,9 @@
                     android:id="@+id/imageButton4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignTop="@+id/textView12"
+                    android:layout_alignTop="@+id/dayTemp_text"
                     android:layout_marginLeft="8dp"
-                    android:layout_toEndOf="@+id/textView12"
+                    android:layout_toEndOf="@+id/dayTemp_text"
                     android:background="?android:selectableItemBackground"
                     android:paddingTop="2dp"
                     android:tint="@color/colour_highlight_grey"
