@@ -6,7 +6,7 @@
 
     <color name="black_overlay">#66000000</color>
 
-    <color name="colour_highlight_grey">#ff666666</color>
+    <color name="colour_highlight_grey">#666666</color>
     <color name="colour_focused">#ff000066</color>
     <color name="colour_pressed">#87e3ff</color>
     <color name="black">#000000</color>

@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -105,10 +106,17 @@ public class CustomAdapter extends BaseAdapter {
         ImageView img = (ImageView) view.findViewById(R.id.imageView);
         TextView temperatureTxt = (TextView) view.findViewById(R.id.temperature);
         TextView dateTxt = (TextView) view.findViewById(R.id.date);
+        ImageButton editButton = (ImageButton) view.findViewById(R.id.imageButton);
         try {
             temperatureTxt.setText(capitalize(s.getType()));
             dateTxt.setText(s.getTime());
             img.setImageResource(images[i]);
+            editButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    selectionDialog(s);
+                }
+            });
         } catch (Exception e) {
             Log.e("getView()","from CustomAdapter, writing on object that does not exist");
         }
