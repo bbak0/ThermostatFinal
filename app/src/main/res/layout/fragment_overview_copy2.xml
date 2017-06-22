@@ -89,7 +89,7 @@
                     android:layout_centerHorizontal="true">
 
                     <com.triggertrap.seekarc.SeekArc
-                        style="@style/AppTheme"
+                        style="@style/Theme.AppCompat.DayNight.DarkActionBar"
                         android:id="@+id/seekArc"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
