@@ -378,7 +378,7 @@ public class MondayFragment extends Fragment {
                 // if list is empty display appropriate message
                 if (MondaySwitches.size() == 0) {
                     emptyList.setText("List empty! " +
-                            "You can add switches if you like by using the add button");
+                            "Add switches using the button in the bottom right corner.");
                     // removing all the content from the list
                     // in this way the empty view set on displayData() can be shown
                     lv.setAdapter(null); //!!!!!!!!
@@ -454,7 +454,6 @@ public class MondayFragment extends Fragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("");
-
 
 
         // custom layout
@@ -747,6 +746,7 @@ public class MondayFragment extends Fragment {
 
     // resetting the entire schedule to default
     public void reset() {
+
         new Thread(new Runnable() {
             @Override
             public void run() {
