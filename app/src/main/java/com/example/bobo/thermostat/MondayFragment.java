@@ -104,6 +104,12 @@ public class MondayFragment extends Fragment {
         lv = (ListView) v.findViewById(R.id.Lista);
         // declaring the message for empty list
         emptyList = (TextView)v.findViewById(R.id.emptyList);
+        
+        //declaring the day
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            day = bundle.getString("day");
+        }
 
         // declaring the buttons
 
