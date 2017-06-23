@@ -486,6 +486,10 @@ public class MondayFragment extends Fragment {
         
         //24 hour format for the time picker
         timePicker.setIs24HourView(true);
+        
+        // setting the picker to 00:00
+        timePicker.setHour(0);
+        timePicker.setMinute(0);
 
 
         new Thread(new Runnable() {
