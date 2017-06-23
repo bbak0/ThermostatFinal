@@ -477,7 +477,9 @@ public class MondayFragment extends Fragment {
 
         daySwitchesLeft.setText(nrDaySwitchesOn() + "/5 used");
         nightSwitchesLeft.setText(nrNightSwitchesOn() + "/5 used");
-
+        
+        //24 hour format for the time picker
+        timePicker.setIs24HourView(true);
 
 
         new Thread(new Runnable() {
