@@ -338,6 +338,10 @@ public class CustomAdapter extends BaseAdapter {
         //24 hour format for the time picker
         timePicker.setIs24HourView(true);
         
+        // setting the picker to match the same time as the selected switch
+        timePicker.setHour(Integer.parseInt(time_selected.substring(0,2)));
+        timePicker.setMinute(Integer.parseInt(time_selected.substring(3,5)));
+        
 
         new Thread(new Runnable() {
             @Override
