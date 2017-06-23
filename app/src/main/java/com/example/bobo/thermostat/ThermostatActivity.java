@@ -130,7 +130,7 @@ public class ThermostatActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
+   @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
@@ -148,27 +148,104 @@ public class ThermostatActivity extends AppCompatActivity
             setTitle("Monday");
             MondayFragment fragment = new MondayFragment();
 
+            //putting the information related with day
+            Bundle bundle = new Bundle();
+            bundle.putString("day","Monday");
+            fragment.setArguments(bundle);
+
+            // making the transition
             FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
             fm.replace(R.id.frame, fragment, "fragment1");
             fm.commit();
 
         } else if (id == R.id.Tuesday) {
             setTitle("Tuesday");
-            TuesdayFragment fragment = new TuesdayFragment();
+            MondayFragment fragment = new MondayFragment();
 
+            //putting the information related with day
+            Bundle bundle = new Bundle();
+            bundle.putString("day","Tuesday");
+            fragment.setArguments(bundle);
+
+            // making the transition
             FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
             fm.replace(R.id.frame, fragment, "fragment1");
             fm.commit();
 
         } else if (id == R.id.Wednesday) {
 
+            setTitle("Wednesday");
+            MondayFragment fragment = new MondayFragment();
+
+            //putting the information related with day
+            Bundle bundle = new Bundle();
+            bundle.putString("day","Wednesday");
+            fragment.setArguments(bundle);
+
+            // making the transition
+            FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
+            fm.replace(R.id.frame, fragment, "fragment1");
+            fm.commit();
+
         } else if (id == R.id.Thursday) {
+
+            setTitle("Thursday");
+            MondayFragment fragment = new MondayFragment();
+
+            //putting the information related with day
+            Bundle bundle = new Bundle();
+            bundle.putString("day","Thursday");
+            fragment.setArguments(bundle);
+
+            // making the transition
+            FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
+            fm.replace(R.id.frame, fragment, "fragment1");
+            fm.commit();
 
         } else if (id == R.id.Friday) {
 
+            setTitle("Friday");
+            MondayFragment fragment = new MondayFragment();
+
+            //putting the information related with day
+            Bundle bundle = new Bundle();
+            bundle.putString("day","Friday");
+            fragment.setArguments(bundle);
+
+            // making the transition
+            FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
+            fm.replace(R.id.frame, fragment, "fragment1");
+            fm.commit();
+
         } else if (id == R.id.Saturday) {
 
+            setTitle("Saturday");
+            MondayFragment fragment = new MondayFragment();
+
+            //putting the information related with day
+            Bundle bundle = new Bundle();
+            bundle.putString("day","Saturday");
+            fragment.setArguments(bundle);
+
+            // making the transition
+            FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
+            fm.replace(R.id.frame, fragment, "fragment1");
+            fm.commit();
+
         } else if (id == R.id.Sunday) {
+
+            setTitle("Sunday");
+            MondayFragment fragment = new MondayFragment();
+
+            //putting the information related with day
+            Bundle bundle = new Bundle();
+            bundle.putString("day","Sunday");
+            fragment.setArguments(bundle);
+
+            // making the transition
+            FragmentTransaction fm = getSupportFragmentManager().beginTransaction();
+            fm.replace(R.id.frame, fragment, "fragment1");
+            fm.commit();
 
         }
 
@@ -176,7 +253,6 @@ public class ThermostatActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
 
 
 }
