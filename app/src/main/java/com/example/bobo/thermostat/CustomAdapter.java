@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import util.*;
@@ -56,16 +57,17 @@ public class CustomAdapter extends BaseAdapter {
     Thread verifyThread;
     // string used to verify deletion/modification of switch
     String time_verify;
-
+    ArrayList<String> temps;
     // thread used in the modifySwitchDialog
     Thread dialogThread;
     WeekProgram wpg_dialog;
 
-    public CustomAdapter(Context c, ArrayList<Switch> switches, int[] images, String day) {
+    public CustomAdapter(Context c, ArrayList<Switch> switches, int[] images, String day, ArrayList<String> tmp) {
         this.c = c;
         this.switches = switches;
         this.images = images;
         this.day = day;
+        this.temps = tmp;
     }
 
     // updating data, or basically making a connection between the new switch from xActivity
@@ -343,31 +345,8 @@ public class CustomAdapter extends BaseAdapter {
         timePicker.setMinute(Integer.parseInt(time_selected.substring(3,5)));
         
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                try {
-                    final String dayTempVal = HeatingSystem.get("dayTemperature");
-                    final String nightTempVal = HeatingSystem.get("nightTemperature");
-                    Log.d("temps",dayTempVal + " " + nightTempVal);
-                    dayTemp.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            dayTemp.setText(dayTempVal + "\u2103");
-                        }
-                    });
-                    nightTemp.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            nightTemp.setText(nightTempVal + "\u2103");
-                        }
-                    });
-                } catch (Exception e) {
-                    System.err.println("Error from getdata "+e);
-                }
-            }
-        }).start();
+        dayTemp.setText(temps.get(0) + "\u2103");
+        nightTemp.setText(temps.get(1) + "\u2103");
 
         // setting the availability of the radio buttons in accordance with the nr of day/night switches on until now
         // I have assumed that switches is "new" enough and that there is no need to start a new thread

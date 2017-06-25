@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:seekarc="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/bMinus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_toStartOf="@+id/frameLayout"
+            android:layout_weight="1"
+            android:background="?android:selectableItemBackground"
+            android:tint="@color/colorPrimary"
+            seekarc:srcCompat="@drawable/ic_remove_circle_outline_black_24dp" />
+
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_below="@+id/textView9"
+            android:layout_centerHorizontal="true">
+
+            <com.triggertrap.seekarc.SeekArc
+                android:id="@+id/seekArc"
+                style="@style/Theme.AppCompat.DayNight.DarkActionBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="30dp"
+                seekarc:max="250"
+                seekarc:thumb="@drawable/thumb"
+                seekarc:progressColor="@color/colorPrimary"
+                seekarc:arcColor="@color/colorAccent"
+                seekarc:rotation="180"
+                seekarc:startAngle="30"
+                seekarc:sweepAngle="300"
+                seekarc:touchInside="true" />
+
+            <TextView
+                android:id="@+id/targetTemperature_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="0"
+                android:textSize="48dp" />
+        </FrameLayout>
+
+        <ImageButton
+            android:id="@+id/bPlus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_toEndOf="@+id/frameLayout"
+            android:layout_weight="1"
+            android:background="?android:selectableItemBackground"
+            android:tint="@color/colorPrimary"
+            seekarc:srcCompat="@drawable/ic_add_circle_outline_black_24dp" />
+
+    </LinearLayout>
+
+</LinearLayout>

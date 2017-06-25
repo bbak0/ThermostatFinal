@@ -59,6 +59,7 @@ public class MondayFragment extends Fragment {
     int UPDATE_INTERVAL_MdL = 3000;
     // the array of switches for Monday
     ArrayList<Switch> MondaySwitches = new ArrayList<>();
+    ArrayList<String> temperatures = new ArrayList<>();
     int[] IMAGES = new int[100];
     Switch s,s2;
     WeekProgram wpg;
@@ -97,7 +98,7 @@ public class MondayFragment extends Fragment {
         // Inflate the layout for this fragment
         v = inflater.inflate(R.layout.fragment_monday, container, false);
 
-
+        getTemps();
         // START
 
         // declaring the list
@@ -244,6 +245,23 @@ public class MondayFragment extends Fragment {
 
     }
 
+    public void getTemps(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                try {
+                    final String dayTempVal = HeatingSystem.get("dayTemperature");
+                    final String nightTempVal = HeatingSystem.get("nightTemperature");
+                    temperatures.add(dayTempVal);
+                    temperatures.add(nightTempVal);
+                } catch (Exception e) {
+                    System.err.println("Error from getdata "+e);
+                }
+            }
+        }).start();
+    }
+
     public void closeNetwork() {
         if (!isNetworkAvailable() && !alreadyNotified) {
             // canceling the loops/auto-updates/threads
@@ -370,7 +388,7 @@ public class MondayFragment extends Fragment {
                 if (lv.getAdapter() == null) {
                     // we also link the adapter with MondayFragment
                     // in this way we can call the methods from MondayFragment in CustomAdapter
-                    adapter = new CustomAdapter(getActivity(), MondaySwitches, IMAGES, day);
+                    adapter = new CustomAdapter(getActivity(), MondaySwitches, IMAGES, day, temperatures);
                     // adding a message to be displayed when list empty/offline
                     lv.setEmptyView(emptyList);
                     // setting the adapter/custom interface !!
@@ -491,32 +509,8 @@ public class MondayFragment extends Fragment {
         timePicker.setHour(0);
         timePicker.setMinute(0);
 
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                try {
-                    dayTempVal = HeatingSystem.get("dayTemperature");
-                    nightTempVal = HeatingSystem.get("nightTemperature");
-                    Log.d("temps",dayTempVal + " " + nightTempVal);
-                    dayTemp.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            dayTemp.setText(dayTempVal + "\u2103");
-                        }
-                    });
-                    nightTemp.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            nightTemp.setText(nightTempVal + "\u2103");
-                        }
-                    });
-                } catch (Exception e) {
-                    System.err.println("Error from getdata "+e);
-                }
-            }
-        }).start();
+        dayTemp.setText(temperatures.get(0) + "\u2103");
+        nightTemp.setText(temperatures.get(1) + "\u2103");
 
 
 

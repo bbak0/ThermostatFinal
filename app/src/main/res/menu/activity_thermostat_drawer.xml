@@ -4,12 +4,8 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/Overview"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_phone_android_black_24dp"
             android:title="Overview" />
-        <item
-            android:id="@+id/Settings"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Settings" />
     </group>
 
     <item android:title="Days">
@@ -17,31 +13,31 @@
             <group android:checkableBehavior="single">
             <item
                 android:id="@+id/Monday"
-                android:icon="@drawable/ic_menu_gallery"
+                android:icon="@drawable/ic_today_black_24dp"
                 android:title="Monday" />
             <item
                 android:id="@+id/Tuesday"
-                android:icon="@drawable/ic_menu_slideshow"
+                android:icon="@drawable/ic_today_black_24dp"
                 android:title="Tuesday" />
             <item
                 android:id="@+id/Wednesday"
-                android:icon="@drawable/ic_menu_manage"
+                android:icon="@drawable/ic_today_black_24dp"
                 android:title="Wednesday" />
             <item
                 android:id="@+id/Thursday"
-                android:icon="@drawable/ic_menu_manage"
+                android:icon="@drawable/ic_today_black_24dp"
                 android:title="Thursday" />
             <item
                 android:id="@+id/Friday"
-                android:icon="@drawable/ic_menu_manage"
+                android:icon="@drawable/ic_today_black_24dp"
                 android:title="Friday" />
             <item
                 android:id="@+id/Saturday"
-                android:icon="@drawable/ic_menu_manage"
+                android:icon="@drawable/ic_today_black_24dp"
                 android:title="Saturday" />
             <item
                 android:id="@+id/Sunday"
-                android:icon="@drawable/ic_menu_manage"
+                android:icon="@drawable/ic_today_black_24dp"
                 android:title="Sunday" />
             </group>
         </menu>

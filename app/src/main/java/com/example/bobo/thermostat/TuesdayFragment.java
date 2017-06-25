@@ -212,7 +212,7 @@ public class TuesdayFragment extends Fragment{
                 // or if it is the creation of the list
                 // in this way the scroll position is maintained
                 if (lv.getAdapter() == null) {
-                    adapter = new CustomAdapter(getActivity(), TuesdaySwitches, IMAGES, "Tuesday");
+                    adapter = new CustomAdapter(getActivity(), TuesdaySwitches, IMAGES, "Tuesday", new ArrayList<String>());
                     lv.setAdapter(adapter);
                 }
                 else {
